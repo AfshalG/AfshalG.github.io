@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Profile Preview — Afshal Gulam</title>
+    <title>Afshal Gulam · I engineer the human side of software</title>
+    <meta name="description" content="Afshal Gulam. Computer Engineering @ NUS, SWE Analyst @ Fusion Fund. I build agentic AI, end to end. Creator of AgentDesk & TaskGenie.">
+    <meta property="og:title" content="Afshal Gulam · I engineer the human side of software">
+    <meta property="og:description" content="Computer Engineering @ NUS · SWE Analyst @ Fusion Fund. Creator of AgentDesk & TaskGenie.">
+    <meta property="og:url" content="https://afshalg.github.io/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
     <style>
@@ -58,6 +64,19 @@
             pointer-events: none;
         }
         .header-inner { position: relative; z-index: 1; }
+
+        .header-flex { display: flex; justify-content: space-between; align-items: center; gap: 26px; margin-bottom: 24px; }
+        .header-text { flex: 1; min-width: 0; }
+        .header-text .subtitle { margin-bottom: 0; }
+        .avatar {
+            width: 106px; height: 106px; border-radius: 50%; object-fit: cover;
+            flex-shrink: 0; border: 2px solid var(--border);
+            box-shadow: 0 0 0 4px rgba(88,166,255,.08), 0 8px 24px rgba(0,0,0,.4);
+        }
+        @media (max-width: 680px) {
+            .header-flex { flex-direction: column-reverse; align-items: flex-start; gap: 16px; }
+            .avatar { width: 84px; height: 84px; }
+        }
 
         .name {
             font-family: 'Sora', sans-serif;
@@ -119,6 +138,11 @@
         .pill-linkedin { background: #0A66C2; color: #fff; }
         .pill-github   { background: #21262D; color: var(--text-primary); border: 1px solid var(--border); }
         .pill-email    { background: #21262D; color: var(--text-primary); border: 1px solid var(--border); }
+        .pill-fusion   {
+            background: rgba(63,185,80,.1);
+            border: 1px solid rgba(63,185,80,.3);
+            color: #56d364;
+        }
         .pill-google   {
             background: rgba(66,133,244,.1);
             border: 1px solid rgba(66,133,244,.3);
@@ -234,10 +258,12 @@
             border: 1px solid var(--border);
             border-radius: 8px;
             padding: 20px;
-            transition: border-color .2s;
+            transition: border-color .2s, transform .2s;
         }
-        .proj-card:hover { border-color: rgba(88,166,255,.35); }
+        .proj-card:hover { border-color: rgba(88,166,255,.35); transform: translateY(-2px); }
         .proj-card.full { grid-column: 1 / -1; }
+        .proj-card.flag { border-color: rgba(255,107,53,.3); }
+        .proj-card.flag:hover { border-color: rgba(255,107,53,.55); }
 
         .proj-award {
             font-family: 'JetBrains Mono', monospace;
@@ -251,6 +277,13 @@
             font-weight: 600;
             color: var(--accent-blue);
             margin-bottom: 3px;
+        }
+        .proj-name a { color: var(--accent-blue); text-decoration: none; }
+        .proj-name a:hover { text-decoration: underline; }
+        .proj-name .live-dot {
+            display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+            background: var(--accent-green); box-shadow: 0 0 7px var(--accent-green);
+            margin-left: 6px; vertical-align: middle;
         }
         .proj-sub {
             font-size: 11.5px;
@@ -340,6 +373,11 @@
         .lang-fill { height:100%; border-radius:2px; }
         .lang-pct { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--text-secondary); width:34px; text-align:right; flex-shrink:0; }
 
+        .now-list { display:flex; flex-direction:column; gap:9px; }
+        .now-item { display:flex; align-items:flex-start; gap:9px; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-secondary); line-height:1.5; }
+        .now-item .dot { color: var(--accent-orange); flex-shrink:0; }
+        .now-item b { color: var(--text-primary); font-weight:500; }
+
         /* ── FOOTER ── */
         .footer {
             padding: 20px 40px;
@@ -352,6 +390,18 @@
         }
         .footer span.blue { color: var(--accent-blue); }
         .footer span.orange { color: var(--accent-orange); }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 680px) {
+            body { padding: 16px 10px; }
+            .header { padding: 34px 22px 26px; }
+            .name { font-size: 30px; }
+            .section { padding: 24px 22px; }
+            .about-grid { grid-template-columns: 1fr; }
+            .proj-grid { grid-template-columns: 1fr; }
+            .proj-card.full { grid-column: auto; }
+            .footer { padding: 18px 22px; }
+        }
     </style>
 </head>
 <body>
@@ -360,19 +410,26 @@
     <!-- HEADER -->
     <div class="header">
         <div class="header-inner">
-            <div class="name">Afshal <em>Gulam</em></div>
-            <div class="tagline">
-                <span class="prompt">~$</span>
-                I engineer the human side of software
-                <span class="cursor"></span>
-            </div>
-            <div class="subtitle">
-                Computer Engineering @ NUS &nbsp;·&nbsp; Frontend Architecture &amp; Agentic AI &nbsp;·&nbsp; Singapore
+            <div class="header-flex">
+                <div class="header-text">
+                    <div class="name">Afshal <em>Gulam</em></div>
+                    <div class="tagline">
+                        <span class="prompt">~$</span>
+                        I engineer the human side of software
+                        <span class="cursor"></span>
+                    </div>
+                    <div class="subtitle">
+                        SWE Analyst @ Fusion Fund 🍀 &nbsp;·&nbsp; Computer Engineering @ NUS &nbsp;·&nbsp; Agentic AI &amp; Full-Stack
+                    </div>
+                </div>
+                <img class="avatar" src="profile.jpg" alt="Afshal Gulam" />
             </div>
             <div class="connect-row">
                 <a class="pill pill-linkedin" href="https://linkedin.com/in/afshal-g" target="_blank">in LinkedIn</a>
                 <a class="pill pill-github" href="https://github.com/AfshalG" target="_blank">⌥ GitHub</a>
                 <a class="pill pill-email" href="mailto:afshalgulam@gmail.com">✉ Email</a>
+                <a class="pill pill-github" href="https://agentdesk-landing-iota.vercel.app/resume.pdf" target="_blank">▤ Résumé</a>
+                <a class="pill pill-fusion" href="https://fusionfund.com" target="_blank">🍀 Fusion Fund · SV 2026</a>
                 <a class="pill pill-google" href="https://grow.google/intl/ALL_sg/stories/?tab=pioneers-%26-builders" target="_blank">✦ Featured by Google 2026</a>
             </div>
         </div>
@@ -384,21 +441,24 @@
         <div class="about-grid">
             <div>
                 <p class="about-text">
-                    I specialise in <strong>Frontend Architecture and Interaction Design</strong> —
-                    bridging complex backend systems with polished, intuitive user experiences.
-                    From agentic AI platforms to assistive HealthTech, I make complex backend logic
-                    feel intuitive to users.
+                    I build <strong>agentic AI, end to end</strong>, from the model to the API
+                    to the interface people actually touch. From developer tools to assistive
+                    HealthTech, I find a real problem, validate it fast, and ship. I care as
+                    much about how software <strong>feels</strong> as whether it works.
                 </p>
                 <ul class="bullets">
-                    <li>Building agentic AI platforms with multi-step tool calling</li>
-                    <li>Developing IoT wearables for assistive HealthTech</li>
-                    <li>Open to Software Engineering / AI internships &nbsp;·&nbsp; SG 2026/27</li>
+                    <li><span>Joining <strong>Fusion Fund</strong> (Silicon Valley) as a Software Engineering Analyst · Aug 2026</span></li>
+                    <li><span>Building agentic AI platforms with multi-step tool calling</span></li>
+                    <li><span>Shipping developer tools like AgentDesk, which verifies what AI coding agents ship</span></li>
                 </ul>
             </div>
-            <div class="stats-card" id="gh-stats-card">
-                <div class="stats-header">github stats</div>
-                <div class="stats-body" id="gh-stats-body">
-                    <div class="stat-row"><span class="stat-key">loading...</span><span class="stat-val">—</span></div>
+            <div class="stats-card">
+                <div class="stats-header">github · @AfshalG</div>
+                <div class="stats-body">
+                    <div class="stat-row"><span class="stat-key">Public Repos</span><span class="stat-val" data-stat="repos">25+</span></div>
+                    <div class="stat-row"><span class="stat-key">Next</span><span class="stat-val">Fusion Fund</span></div>
+                    <div class="stat-row"><span class="stat-key">Focus</span><span class="stat-val">Agentic AI</span></div>
+                    <div class="stat-row"><span class="stat-key">Building</span><span class="stat-val">in public</span></div>
                 </div>
             </div>
         </div>
@@ -409,20 +469,12 @@
         <div class="section-label">Recognition</div>
         <table class="rec-table">
             <tr>
-                <td>🥇</td>
+                <td>🚀</td>
                 <td>
-                    <div class="rec-name">NUS Orbital Judges' Choice Award</div>
-                    <div class="rec-meta">TaskGenie &nbsp;·&nbsp; Top of 1,000+ teams &nbsp;·&nbsp; Aug 2025</div>
+                    <div class="rec-name">TinyFish Accelerator (Phase 2)</div>
+                    <div class="rec-meta">AgentDesk &nbsp;·&nbsp; Only student in a cohort of industry veterans &nbsp;·&nbsp; 2026</div>
                 </td>
-                <td><span class="rec-badge" style="background:rgba(255,107,53,.1);color:#FF6B35;border:1px solid rgba(255,107,53,.3)">Judges' Choice</span></td>
-            </tr>
-            <tr>
-                <td>✨</td>
-                <td>
-                    <div class="rec-name">Featured by Google — Grow with Google SG60</div>
-                    <div class="rec-meta">Gemini in Education track &nbsp;·&nbsp; Dec 2025</div>
-                </td>
-                <td><span class="rec-badge" style="background:rgba(66,133,244,.1);color:#5A9FFB;border:1px solid rgba(66,133,244,.3)">Google</span></td>
+                <td><span class="rec-badge" style="background:rgba(255,107,53,.1);color:#FF6B35;border:1px solid rgba(255,107,53,.3)">Accelerator</span></td>
             </tr>
             <tr>
                 <td>🎙️</td>
@@ -431,6 +483,22 @@
                     <div class="rec-meta">Featured alongside Google APAC President &nbsp;·&nbsp; Feb 2026</div>
                 </td>
                 <td><span class="rec-badge" style="background:rgba(66,133,244,.1);color:#5A9FFB;border:1px solid rgba(66,133,244,.3)">Google</span></td>
+            </tr>
+            <tr>
+                <td>✨</td>
+                <td>
+                    <div class="rec-name">Featured by Google · Grow with Google SG60</div>
+                    <div class="rec-meta">Gemini in Education track &nbsp;·&nbsp; Dec 2025</div>
+                </td>
+                <td><span class="rec-badge" style="background:rgba(66,133,244,.1);color:#5A9FFB;border:1px solid rgba(66,133,244,.3)">Google</span></td>
+            </tr>
+            <tr>
+                <td>🥇</td>
+                <td>
+                    <div class="rec-name">NUS Orbital Judges' Choice Award</div>
+                    <div class="rec-meta">TaskGenie &nbsp;·&nbsp; Top of 1,000+ teams &nbsp;·&nbsp; Aug 2025</div>
+                </td>
+                <td><span class="rec-badge" style="background:rgba(255,107,53,.1);color:#FF6B35;border:1px solid rgba(255,107,53,.3)">Judges' Choice</span></td>
             </tr>
             <tr>
                 <td>🏅</td>
@@ -456,9 +524,29 @@
         <div class="section-label">Featured Projects</div>
         <div class="proj-grid">
 
+            <div class="proj-card flag full">
+                <div class="proj-award">🚀 TinyFish Accelerator · Live &amp; downloadable</div>
+                <div class="proj-name"><a href="https://agentdesk-landing-iota.vercel.app/" target="_blank">AgentDesk</a><span class="live-dot"></span></div>
+                <div class="proj-sub">The verification layer for AI coding agents</div>
+                <div class="proj-desc">“Agents ship. AgentDesk verifies.” A native macOS app that runs real-browser checks on what AI coding agents ship (deployments, OAuth flows, E2E scenarios), then diagnoses failures and files them on the PR. Built solo and shipped live through TinyFish's Accelerator, as the only student in a cohort of industry veterans.</div>
+                <div class="metrics">
+                    <span class="metric">real-browser automation</span>
+                    <span class="metric">185+ commits</span>
+                    <span class="metric">~56k LOC</span>
+                    <span class="metric">4 public releases</span>
+                </div>
+                <div class="stack">
+                    <span class="stag">Rust</span>
+                    <span class="stag">Tauri v2</span>
+                    <span class="stag">React 19</span>
+                    <span class="stag">TypeScript</span>
+                    <span class="stag">TinyFish API</span>
+                </div>
+            </div>
+
             <div class="proj-card">
                 <div class="proj-award">🏆 Judges' Choice · Featured by Google</div>
-                <div class="proj-name"><a href="https://taskgenie-ai.vercel.app/" target="_blank" style="color:var(--accent-blue);text-decoration:none;">TaskGenie</a></div>
+                <div class="proj-name"><a href="https://taskgenie-ai.vercel.app/" target="_blank">TaskGenie</a></div>
                 <div class="proj-sub">Agentic AI Task Management Platform</div>
                 <div class="proj-desc">Multi-agent system with 16 function-calling tools. Production-scale Next.js 15 app with 2000-dim semantic vector search.</div>
                 <div class="metrics">
@@ -478,9 +566,9 @@
 
             <div class="proj-card">
                 <div class="proj-award">🏅 NUS IDEATE Semifinalist · Top 16 of 500+</div>
-                <div class="proj-name"><a href="https://github.com/AfshalG/rehaband-project" target="_blank" style="color:var(--accent-blue);text-decoration:none;">REHABAND</a></div>
+                <div class="proj-name"><a href="https://github.com/AfshalG/rehaband-project" target="_blank">REHABAND</a></div>
                 <div class="proj-sub">Smart Rehabilitation Wearable</div>
-                <div class="proj-desc">IMU-based wearable with real-time haptic coaching. Tracks range of motion, cadence &amp; smoothness for physiotherapy patients.</div>
+                <div class="proj-desc">IMU-based wearable with real-time haptic coaching. Tracks range of motion, cadence &amp; smoothness for physiotherapy patients. Led a 4-person team.</div>
                 <div class="metrics">
                     <span class="metric">sub-$70 MVP</span>
                     <span class="metric">$1k fund secured</span>
@@ -495,9 +583,9 @@
 
             <div class="proj-card full">
                 <div class="proj-award">🥈 DSTA BrainHack National Semifinalist</div>
-                <div class="proj-name"><a href="https://github.com/AfshalG/DSTA-BrainHack-2025" target="_blank" style="color:var(--accent-blue);text-decoration:none;">Multi-Domain AI System</a></div>
+                <div class="proj-name"><a href="https://github.com/AfshalG/DSTA-BrainHack-2025" target="_blank">Multi-Domain AI System</a></div>
                 <div class="proj-sub">Computer Vision · Reinforcement Learning · Document Reconstruction</div>
-                <div class="proj-desc">YOLOv8m object detection + PPO RL agent + document reassembly. Three models containerised on GCP — built and deployed in 24 hours.</div>
+                <div class="proj-desc">YOLOv8m object detection, a PPO RL agent, and document reassembly. Three models containerised on GCP, built and deployed in 24 hours.</div>
                 <div class="metrics">
                     <span class="metric">52.1% mAP</span>
                     <span class="metric">99.4% RL efficiency</span>
@@ -527,48 +615,61 @@
             <div class="tech-cat">Languages</div>
             <div class="tech-row">
                 <span class="tbadge" style="color:#3178C6;border-color:#3178C6;background:rgba(49,120,198,.08)">TypeScript</span>
-                <span class="tbadge" style="color:#3776AB;border-color:#3776AB;background:rgba(55,118,171,.08)">Python</span>
                 <span class="tbadge" style="color:#c9a227;border-color:#c9a227;background:rgba(247,223,30,.06)">JavaScript</span>
-                <span class="tbadge" style="color:#5B9BD5;border-color:#5B9BD5;background:rgba(0,89,156,.08)">C++</span>
+                <span class="tbadge" style="color:#3776AB;border-color:#3776AB;background:rgba(55,118,171,.08)">Python</span>
+                <span class="tbadge" style="color:#DEA584;border-color:rgba(222,165,132,.4);background:rgba(222,165,132,.07)">Rust</span>
+                <span class="tbadge" style="color:#E76F00;border-color:rgba(231,111,0,.4);background:rgba(231,111,0,.07)">Java</span>
                 <span class="tbadge" style="color:#A8B9CC;border-color:rgba(168,185,204,.4);background:rgba(168,185,204,.06)">C</span>
+                <span class="tbadge" style="color:#5B9BD5;border-color:#5B9BD5;background:rgba(0,89,156,.08)">C++</span>
+                <span class="tbadge" style="color:#E6A44E;border-color:rgba(230,164,78,.4);background:rgba(230,164,78,.07)">SQL</span>
             </div>
         </div>
 
         <div class="tech-group">
             <div class="tech-cat">Frontend</div>
             <div class="tech-row">
-                <span class="tbadge" style="color:#E6EDF3;border-color:#444;background:#21262D">Next.js 15</span>
+                <span class="tbadge" style="color:#E6EDF3;border-color:#444;background:#21262D">Next.js</span>
                 <span class="tbadge" style="color:#61DAFB;border-color:rgba(97,218,251,.4);background:rgba(97,218,251,.06)">React</span>
-                <span class="tbadge" style="color:#06B6D4;border-color:rgba(6,182,212,.4);background:rgba(6,182,212,.06)">Tailwind CSS</span>
             </div>
         </div>
 
         <div class="tech-group">
             <div class="tech-cat">AI / ML</div>
             <div class="tech-row">
-                <span class="tbadge" style="color:#EE4C2C;border-color:rgba(238,76,44,.4);background:rgba(238,76,44,.07)">PyTorch</span>
+                <span class="tbadge" style="color:#D97757;border-color:rgba(217,119,87,.4);background:rgba(217,119,87,.08)">Anthropic SDK</span>
                 <span class="tbadge" style="color:#FF6B35;border-color:rgba(255,107,53,.4);background:rgba(255,107,53,.07)">LangGraph</span>
                 <span class="tbadge" style="color:#E6EDF3;border-color:#444;background:#21262D">Vercel AI SDK</span>
-                <span class="tbadge" style="color:#A371F7;border-color:rgba(163,113,247,.4);background:rgba(163,113,247,.07)">YOLOv8</span>
-                <span class="tbadge" style="color:#8B949E;border-color:rgba(139,148,158,.4);background:rgba(139,148,158,.06)">Stable Baselines3</span>
+                <span class="tbadge" style="color:#EE4C2C;border-color:rgba(238,76,44,.4);background:rgba(238,76,44,.07)">PyTorch</span>
+            </div>
+        </div>
+
+        <div class="tech-group">
+            <div class="tech-cat">Desktop &amp; Systems</div>
+            <div class="tech-row">
+                <span class="tbadge" style="color:#FFC131;border-color:rgba(255,193,49,.4);background:rgba(255,193,49,.07)">Tauri v2</span>
+                <span class="tbadge" style="color:#DEA584;border-color:rgba(222,165,132,.4);background:rgba(222,165,132,.07)">tokio</span>
             </div>
         </div>
 
         <div class="tech-group">
             <div class="tech-cat">Backend &amp; Cloud</div>
             <div class="tech-row">
+                <span class="tbadge" style="color:#339933;border-color:rgba(51,153,51,.4);background:rgba(51,153,51,.07)">Node.js</span>
                 <span class="tbadge" style="color:#009688;border-color:rgba(0,150,136,.4);background:rgba(0,150,136,.07)">FastAPI</span>
                 <span class="tbadge" style="color:#2496ED;border-color:rgba(36,150,237,.4);background:rgba(36,150,237,.07)">Docker</span>
+                <span class="tbadge" style="color:#4285F4;border-color:rgba(66,133,244,.4);background:rgba(66,133,244,.07)">Google Cloud Platform</span>
                 <span class="tbadge" style="color:#3FCF8E;border-color:rgba(63,207,142,.4);background:rgba(63,207,142,.07)">Supabase</span>
-                <span class="tbadge" style="color:#4285F4;border-color:rgba(66,133,244,.4);background:rgba(66,133,244,.07)">GCP</span>
-                <span class="tbadge" style="color:#339933;border-color:rgba(51,153,51,.4);background:rgba(51,153,51,.07)">Node.js</span>
             </div>
         </div>
 
         <div class="tech-group">
-            <div class="tech-cat">Hardware</div>
+            <div class="tech-cat">Interests</div>
             <div class="tech-row">
-                <span class="tbadge" style="color:#00878F;border-color:rgba(0,135,143,.4);background:rgba(0,135,143,.07)">Arduino Nano 33 BLE</span>
+                <span class="tbadge" style="color:#A371F7;border-color:rgba(163,113,247,.35);background:rgba(163,113,247,.07)">Agentic AI Systems</span>
+                <span class="tbadge" style="color:#A371F7;border-color:rgba(163,113,247,.35);background:rgba(163,113,247,.07)">Developer Tooling</span>
+                <span class="tbadge" style="color:#A371F7;border-color:rgba(163,113,247,.35);background:rgba(163,113,247,.07)">Human-AI Interaction</span>
+                <span class="tbadge" style="color:#A371F7;border-color:rgba(163,113,247,.35);background:rgba(163,113,247,.07)">Full-Stack Product Engineering</span>
+                <span class="tbadge" style="color:#A371F7;border-color:rgba(163,113,247,.35);background:rgba(163,113,247,.07)">Assistive HealthTech</span>
             </div>
         </div>
     </div>
@@ -582,34 +683,38 @@
                 <div class="stat-bars">
                     <div class="stat-lang">
                         <span class="lang-name">TypeScript</span>
-                        <div class="lang-bar"><div class="lang-fill" style="width:62%;background:#3178C6"></div></div>
-                        <span class="lang-pct">62%</span>
+                        <div class="lang-bar"><div class="lang-fill" style="width:54%;background:#3178C6"></div></div>
+                        <span class="lang-pct">54%</span>
                     </div>
                     <div class="stat-lang">
                         <span class="lang-name">Python</span>
-                        <div class="lang-bar"><div class="lang-fill" style="width:22%;background:#3776AB"></div></div>
-                        <span class="lang-pct">22%</span>
+                        <div class="lang-bar"><div class="lang-fill" style="width:24%;background:#3776AB"></div></div>
+                        <span class="lang-pct">24%</span>
+                    </div>
+                    <div class="stat-lang">
+                        <span class="lang-name">Rust</span>
+                        <div class="lang-bar"><div class="lang-fill" style="width:9%;background:#DEA584"></div></div>
+                        <span class="lang-pct">9%</span>
                     </div>
                     <div class="stat-lang">
                         <span class="lang-name">JavaScript</span>
-                        <div class="lang-bar"><div class="lang-fill" style="width:9%;background:#c9a227"></div></div>
-                        <span class="lang-pct">9%</span>
+                        <div class="lang-bar"><div class="lang-fill" style="width:8%;background:#c9a227"></div></div>
+                        <span class="lang-pct">8%</span>
                     </div>
                     <div class="stat-lang">
                         <span class="lang-name">C++</span>
                         <div class="lang-bar"><div class="lang-fill" style="width:5%;background:#5B9BD5"></div></div>
                         <span class="lang-pct">5%</span>
                     </div>
-                    <div class="stat-lang">
-                        <span class="lang-name">C</span>
-                        <div class="lang-bar"><div class="lang-fill" style="width:2%;background:#A8B9CC"></div></div>
-                        <span class="lang-pct">2%</span>
-                    </div>
                 </div>
             </div>
-            <div class="stat-widget" id="gh-streak-widget">
-                <div class="stat-widget-label">Contribution Streak</div>
-                <div id="gh-streak-body" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-secondary);">loading...</div>
+            <div class="stat-widget">
+                <div class="stat-widget-label">Currently</div>
+                <div class="now-list">
+                    <div class="now-item"><span class="dot">▹</span><div>Shipping <b>AgentDesk</b> in public, real-browser agent verification</div></div>
+                    <div class="now-item"><span class="dot">▹</span><div>Prepping to join <b>Fusion Fund</b>, Silicon Valley · Aug 2026</div></div>
+                    <div class="now-item"><span class="dot">▹</span><div>Exploring agentic AI, devtools &amp; developer experience</div></div>
+                </div>
             </div>
         </div>
     </div>
@@ -618,86 +723,9 @@
     <div class="footer">
         <span class="blue">afshal-g</span>
         &nbsp;·&nbsp; Computer Engineering &nbsp;·&nbsp; NUS &nbsp;·&nbsp; Singapore
-        &nbsp;·&nbsp; <span class="orange">Open to internships</span>
+        &nbsp;·&nbsp; <span class="orange">Building agentic AI, end to end</span>
     </div>
 
 </div>
-
-<script>
-const USERNAME = 'AfshalG';
-
-async function loadGitHubStats() {
-    try {
-        const [userRes, reposRes] = await Promise.all([
-            fetch(`https://api.github.com/users/${USERNAME}`),
-            fetch(`https://api.github.com/users/${USERNAME}/repos?per_page=100`)
-        ]);
-        const user = await userRes.json();
-        const repos = await reposRes.json();
-
-        // Aggregate languages across all public repos
-        const langTotals = {};
-        await Promise.all(repos.map(async repo => {
-            if (repo.fork) return;
-            try {
-                const r = await fetch(repo.languages_url);
-                const langs = await r.json();
-                for (const [lang, bytes] of Object.entries(langs)) {
-                    langTotals[lang] = (langTotals[lang] || 0) + bytes;
-                }
-            } catch (_) {}
-        }));
-
-        // Stats card
-        const totalStars = repos.reduce((s, r) => s + r.stargazers_count, 0);
-        const statsBody = document.getElementById('gh-stats-body');
-        statsBody.innerHTML = `
-            <div class="stat-row"><span class="stat-key">Public Repos</span><span class="stat-val">${user.public_repos}</span></div>
-            <div class="stat-row"><span class="stat-key">Followers</span><span class="stat-val">${user.followers}</span></div>
-            <div class="stat-row"><span class="stat-key">Stars Earned</span><span class="stat-val">${totalStars}</span></div>
-            <div class="stat-row"><span class="stat-key">Member Since</span><span class="stat-val">${new Date(user.created_at).getFullYear()}</span></div>
-        `;
-
-        // Language bars — update with real data
-        const sorted = Object.entries(langTotals).sort((a,b) => b[1]-a[1]).slice(0,5);
-        const total = sorted.reduce((s,[,v]) => s+v, 0);
-        const COLORS = { TypeScript:'#3178C6', Python:'#3776AB', JavaScript:'#c9a227', 'C++':'#5B9BD5', C:'#A8B9CC', CSS:'#563d7c', HTML:'#e34c26' };
-        const bars = document.querySelector('.stat-bars');
-        if (bars && sorted.length > 0) {
-            bars.innerHTML = sorted.map(([lang, bytes]) => {
-                const pct = Math.round(bytes / total * 100);
-                const color = COLORS[lang] || '#58A6FF';
-                return `<div class="stat-lang">
-                    <span class="lang-name">${lang}</span>
-                    <div class="lang-bar"><div class="lang-fill" style="width:${pct}%;background:${color}"></div></div>
-                    <span class="lang-pct">${pct}%</span>
-                </div>`;
-            }).join('');
-        }
-
-        // Streak — show recent commit activity
-        const eventsRes = await fetch(`https://api.github.com/users/${USERNAME}/events/public?per_page=100`);
-        const events = await eventsRes.json();
-        const pushes = events.filter(e => e.type === 'PushEvent');
-        const streakEl = document.getElementById('gh-streak-body');
-        if (pushes.length > 0) {
-            const lastPush = new Date(pushes[0].created_at);
-            const daysSince = Math.floor((Date.now() - lastPush) / 86400000);
-            const recentCommits = pushes.slice(0, 10).reduce((s, e) => s + (e.payload.commits?.length || 0), 0);
-            streakEl.innerHTML = `
-                <div style="margin-bottom:8px;font-size:28px;font-weight:700;color:var(--accent-orange);font-family:'Sora',sans-serif;">${recentCommits}+</div>
-                <div style="color:var(--text-secondary);">commits in last 10 pushes</div>
-                <div style="margin-top:6px;font-size:10px;color:var(--text-secondary);">Last active: ${daysSince === 0 ? 'today' : daysSince + 'd ago'}</div>
-            `;
-        } else {
-            streakEl.innerHTML = `<div style="color:var(--text-secondary);">No recent public activity</div>`;
-        }
-    } catch (e) {
-        console.error('GitHub stats failed:', e);
-    }
-}
-
-loadGitHubStats();
-</script>
 </body>
 </html>
